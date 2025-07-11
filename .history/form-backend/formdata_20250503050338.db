@@ -1,0 +1,13 @@
+@app.route('/get-data', methods=['GET'])
+def get_data():
+    # Query all records from the database
+    all_data = FormData.query.all()
+    
+    # Convert the data to a list of dictionaries
+    result = [
+        {"id": entry.id, "name": entry.name, "email": entry.email, "message": entry.message}
+        for entry in all_data
+    ]
+    
+    # Return the data as JSON
+    return jsonify(result), 200
